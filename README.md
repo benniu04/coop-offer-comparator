@@ -1,5 +1,7 @@
 # Co-op Comparator
 
+**Live at [coop-comparator.vercel.app](https://coop-comparator.vercel.app)**
+
 Compare two co-op/internship offers and see which one **actually** leaves you with more money — on the web and on your phone.
 
 Most students compare offers by hourly rate. But rate doesn't decide what you keep: taxes and rent do. And there's a twist most students have never had explained to them:
@@ -68,6 +70,17 @@ Edit `packages/tax/src/tax-data.json` — brackets, deductions, and the top-leve
 - **Other cities/states** — eight locations cover the common co-op hubs and every interesting tax archetype (flat, progressive, city tax, no tax).
 - **401(k), health premiums, other deductions** — most co-ops don't offer them, and each one dilutes the one insight the tool exists to deliver.
 - **Filing nuance** — single filer, resident of the work state, no credits (CT's exemption phase-out, CA's exemption credit, and nonresident/part-year rules are ignored). The footer says it: estimates only, not tax advice.
+
+## Shipping the native app (when you're ready)
+
+The Expo app currently runs via `npm run mobile` (Expo Go / simulator) — a development path, not a store release. To ship it:
+
+1. Apple Developer Program account ($99/yr) and/or Google Play Console ($25 one-time).
+2. `npx eas build --platform ios` (EAS handles signing) → `npx eas submit`.
+3. App Store review needs a privacy policy URL — trivial here since the app collects nothing.
+4. Expect a few days of review lead time.
+
+Until then, the deployed web app covers phone users — it's fully responsive and shareable.
 
 ## What's next
 

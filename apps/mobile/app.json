@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Co-op Comparator",
+    "slug": "coop-comparator",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "backgroundColor": "#eef3ef",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.coopcomparator.app"
+    },
+    "android": {
+      "package": "com.coopcomparator.app",
+      "edgeToEdgeEnabled": true
+    }
+  }
+}

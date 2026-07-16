@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #eef3ef;
+  --color-card: #ffffff;
+  --color-ink: #16302b;
+  --color-ink-soft: #5c7a6e;
+  --color-money: #0b8a5c;
+  --color-money-soft: #e3f3ec;
+  --color-mark: #ffe45c;
+  --color-rule: #d9e5dd;
+  --color-rent: #b0532f;
+
+  --font-display: var(--font-young-serif);
+  --font-sans: var(--font-schibsted);
+  --font-mono: var(--font-spline-mono);
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Ledger figures: every amount lines up like a pay stub. */
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Results reveal: sections fade up in sequence; the refund stub lands last. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes stub-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) rotate(-1deg) scale(0.98);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) rotate(0.5deg) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.reveal-stub {
+  animation: stub-pop 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.6s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

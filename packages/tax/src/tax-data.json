@@ -1,0 +1,114 @@
+{
+  "taxYear": 2026,
+  "federal": {
+    "standardDeduction": 16100,
+    "brackets": [
+      { "upTo": 12400, "rate": 0.1 },
+      { "upTo": 50400, "rate": 0.12 },
+      { "upTo": 105700, "rate": 0.22 },
+      { "upTo": 201775, "rate": 0.24 },
+      { "upTo": 256225, "rate": 0.32 },
+      { "upTo": 640600, "rate": 0.35 },
+      { "upTo": null, "rate": 0.37 }
+    ]
+  },
+  "fica": {
+    "rate": 0.0765
+  },
+  "states": {
+    "MA": {
+      "name": "Massachusetts",
+      "deduction": 4400,
+      "brackets": [{ "upTo": null, "rate": 0.05 }]
+    },
+    "NY": {
+      "name": "New York",
+      "deduction": 8000,
+      "brackets": [
+        { "upTo": 8500, "rate": 0.039 },
+        { "upTo": 11700, "rate": 0.044 },
+        { "upTo": 13900, "rate": 0.0515 },
+        { "upTo": 80650, "rate": 0.054 },
+        { "upTo": 215400, "rate": 0.059 },
+        { "upTo": 1077550, "rate": 0.0685 },
+        { "upTo": 5000000, "rate": 0.0965 },
+        { "upTo": 25000000, "rate": 0.103 },
+        { "upTo": null, "rate": 0.109 }
+      ]
+    },
+    "WA": {
+      "name": "Washington",
+      "deduction": 0,
+      "brackets": []
+    },
+    "CA": {
+      "name": "California",
+      "deduction": 5540,
+      "brackets": [
+        { "upTo": 11079, "rate": 0.01 },
+        { "upTo": 26264, "rate": 0.02 },
+        { "upTo": 41452, "rate": 0.04 },
+        { "upTo": 57542, "rate": 0.06 },
+        { "upTo": 72724, "rate": 0.08 },
+        { "upTo": 371479, "rate": 0.093 },
+        { "upTo": 445771, "rate": 0.103 },
+        { "upTo": 742953, "rate": 0.113 },
+        { "upTo": 1000000, "rate": 0.123 },
+        { "upTo": null, "rate": 0.133 }
+      ]
+    },
+    "CT": {
+      "name": "Connecticut",
+      "deduction": 15000,
+      "brackets": [
+        { "upTo": 10000, "rate": 0.02 },
+        { "upTo": 50000, "rate": 0.045 },
+        { "upTo": 100000, "rate": 0.055 },
+        { "upTo": 200000, "rate": 0.06 },
+        { "upTo": 250000, "rate": 0.065 },
+        { "upTo": 500000, "rate": 0.069 },
+        { "upTo": null, "rate": 0.0699 }
+      ]
+    },
+    "TX": {
+      "name": "Texas",
+      "deduction": 0,
+      "brackets": []
+    },
+    "IL": {
+      "name": "Illinois",
+      "deduction": 2925,
+      "brackets": [{ "upTo": null, "rate": 0.0495 }]
+    },
+    "ME": {
+      "name": "Maine",
+      "deduction": 20600,
+      "brackets": [
+        { "upTo": 27400, "rate": 0.058 },
+        { "upTo": 64850, "rate": 0.0675 },
+        { "upTo": null, "rate": 0.0715 }
+      ]
+    }
+  },
+  "cityTaxes": {
+    "NYC": {
+      "name": "New York City",
+      "brackets": [
+        { "upTo": 12000, "rate": 0.03078 },
+        { "upTo": 25000, "rate": 0.03762 },
+        { "upTo": 50000, "rate": 0.03819 },
+        { "upTo": null, "rate": 0.03876 }
+      ]
+    }
+  },
+  "locations": [
+    { "id": "boston", "label": "Boston, MA", "state": "MA" },
+    { "id": "nyc", "label": "New York City, NY", "state": "NY", "cityTax": "NYC" },
+    { "id": "seattle", "label": "Seattle, WA", "state": "WA" },
+    { "id": "sf", "label": "San Francisco, CA", "state": "CA" },
+    { "id": "hartford", "label": "Hartford, CT", "state": "CT" },
+    { "id": "austin", "label": "Austin, TX", "state": "TX" },
+    { "id": "chicago", "label": "Chicago, IL", "state": "IL" },
+    { "id": "portland", "label": "Portland, ME", "state": "ME" }
+  ]
+}

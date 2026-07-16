@@ -1,0 +1,21 @@
+{
+  "name": "coop-offer-comparator",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "overrides": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.4"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace apps/web",
+    "build": "npm run build --workspace apps/web",
+    "start": "npm run start --workspace apps/web",
+    "mobile": "npm run start --workspace apps/mobile",
+    "test": "npm run test --workspace packages/tax"
+  }
+}

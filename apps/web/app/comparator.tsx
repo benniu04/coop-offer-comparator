@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { calculateFromForm, fmt } from "@/lib/calc";
+import { track } from "@vercel/analytics";
+import { calculateFromForm, compareOffers, fmt } from "@/lib/calc";
 import {
   DEFAULT_A,
   DEFAULT_B,
@@ -34,13 +35,10 @@ export function Comparator({
 
   const resultA = useMemo(() => calculateFromForm(a), [a]);
   const resultB = useMemo(() => calculateFromForm(b), [b]);
-
-  // The verdict compares what you actually keep over the whole co-op.
-  const bothLive = resultA.totalGross > 0 && resultB.totalGross > 0;
-  const difference = resultA.totalNet - resultB.totalNet;
-  const winner: "a" | "b" | null =
-    bothLive && Math.abs(difference) >= 1 ? (difference > 0 ? "a" : "b") : null;
-  const winnerResult = winner === "a" ? resultA : winner === "b" ? resultB : null;
+  const { bothLive, difference, winner, winnerResult, sentence } = useMemo(
+    () => compareOffers(resultA, resultB),
+    [resultA, resultB]
+  );
 
   // Keep the URL in sync (debounced) so every comparison is a shareable link —
   // but only once the user is looking at results.
@@ -60,6 +58,12 @@ export function Comparator({
   function showExample() {
     setA(DEFAULT_A);
     setB(DEFAULT_B);
+    track("example_viewed");
+    goToResults();
+  }
+
+  function finishGuidedFlow() {
+    track("compared");
     goToResults();
   }
 
@@ -71,12 +75,27 @@ export function Comparator({
     setStage("welcome");
   }
 
-  async function copyLink() {
+  async function share() {
     const url = `${window.location.origin}${window.location.pathname}?${encodeOffers(a, b)}`;
     window.history.replaceState(null, "", url);
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1800);
+    // Phones get the native share sheet with the verdict written for them;
+    // desktop falls back to copying the link.
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Co-op Comparator", text: sentence, url });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard blocked (rare) — the URL bar already holds the link.
+      window.prompt("Copy this link:", url);
+    }
   }
 
   if (stage === "welcome") {
@@ -91,7 +110,7 @@ export function Comparator({
         form={isA ? a : b}
         onChange={isA ? setA : setB}
         onBack={() => setStage(isA ? "welcome" : "offer-a")}
-        onContinue={() => (isA ? setStage("offer-b") : goToResults())}
+        onContinue={() => (isA ? setStage("offer-b") : finishGuidedFlow())}
         continueLabel={isA ? "Next: Offer B" : "See which offer wins"}
       />
     );
@@ -132,10 +151,10 @@ export function Comparator({
         </p>
         <button
           type="button"
-          onClick={copyLink}
+          onClick={share}
           className="shrink-0 rounded-lg border border-rule bg-paper px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-money hover:text-money focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-money"
         >
-          {copied ? "Link copied ✓" : "Copy link to share"}
+          {copied ? "Link copied ✓" : "Share this comparison"}
         </button>
       </div>
 

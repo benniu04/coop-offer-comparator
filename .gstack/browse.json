@@ -1,7 +1,7 @@
 {
-  "pid": 80746,
-  "port": 33761,
-  "token": "7ee2159a-ce45-42a7-977f-29c6ba89840b",
-  "startedAt": "2026-07-16T16:03:04.517Z",
+  "pid": 35729,
+  "port": 14581,
+  "token": "e7cd46f3-f12e-463a-a9fd-e9cd99b3fac6",
+  "startedAt": "2026-07-18T02:04:21.608Z",
   "serverPath": "/Users/benniu/.claude/skills/gstack/browse/src/server.ts"
 }

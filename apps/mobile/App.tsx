@@ -482,8 +482,14 @@ export default function App() {
   }
 
   async function share() {
+    const blurb =
+      winner && winnerResult
+        ? `Offer ${winner.toUpperCase()} · ${winnerResult.location.label} leaves you ${fmt(
+            Math.abs(difference)
+          )} more over the co-op.`
+        : "Compare two co-op offers and see which one actually leaves you with more money.";
     await Share.share({
-      message: `${WEB_URL}/?${shareQuery(a, b)}`,
+      message: `${blurb} See the math: ${WEB_URL}/?${shareQuery(a, b)}`,
     });
   }
 

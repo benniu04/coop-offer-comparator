@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Schibsted_Grotesk, Spline_Sans_Mono, Young_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { TAX_YEAR } from "@coop/tax";
 import "./globals.css";
 
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Estimates only. Not tax advice. Single filer, {TAX_YEAR} rates.
           </footer>
         </div>
+        <Analytics />
       </body>
     </html>
   );
